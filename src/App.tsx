@@ -19,10 +19,19 @@ const App = () => {
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(true);
 
-  console.log(fetchQuizQuestions());
-
-
+  console.log(questions);
+  
   const startTrivia = async () => {
+    setLoading(true);
+    setGameOver(false);
+
+    const newQuestions = await fetchQuizQuestions();
+
+    setQuestions(newQuestions);
+    setScore(0);
+    setUserAnswers([]);
+    setNumber(0);
+    setLoading(false);
 
   };
 
@@ -37,12 +46,22 @@ const App = () => {
   return (
     <div className="App">
       <h1>Trivia</h1>
-      <button className="start" onClick={startTrivia}>
-        Start
-      </button>
-      <p className="score">Score:</p>
-      <p>Loading Questions...</p>
-      {/* <QuestionCard questionNr={number + 1} question={questions[number].question} answers={questions[number].answers} userAnswer={userAnswers ? userAnswers[number] : undefined} callback={checkAnswer} /> */}
+      {gameOver || userAnswers.length === 26 ? (
+        <button className="start" onClick={startTrivia}>
+          Start
+        </button>
+      ) : null}
+      {!gameOver ? <p className="score">Score:</p> : null}
+      {loading && <p>Loading Questions...</p>}
+      {!loading && !gameOver && (
+        <QuestionCard 
+          questionNr={number + 1} 
+          question={questions[number].question} 
+          answers={questions[number].answers} 
+          userAnswer={userAnswers ? userAnswers[number] : undefined} 
+          callback={checkAnswer} 
+        />
+      )}
       <button className="next" onClick={nextQuestion}>
         Next Question
       </button>
