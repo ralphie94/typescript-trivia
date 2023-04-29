@@ -34,9 +34,9 @@ export const Wrapper = styled.div`
     }
 
     h1 {
-        font-family: Montserrat;
+        font-family: Roboto;
         font-size: 70px;
-        font-weight: 500;
+        font-weight: 400;
         text-align: center;
         margin: 20px;
     }
@@ -53,5 +53,9 @@ export const Wrapper = styled.div`
 
     .start {
         max-width: 200px;
+    }
+
+    img {
+        width: 550px;
     }
 `

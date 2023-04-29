@@ -64,6 +64,7 @@ const App = () => {
     <>
     <GlobalStyle />
       <Wrapper>
+        <img src={require("./images/seinfeld.png")} />
         <h1>Trivia</h1>
         {gameOver || userAnswers.length === 26 ? (
           <button className="start" onClick={startTrivia}>
